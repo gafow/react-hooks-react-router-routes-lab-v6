@@ -12,44 +12,47 @@ beforeEach(() => {
       <NavBar />
     </BrowserRouter>
   ).container;
+
+  // Log the container HTML to see what is rendered
+  console.log(container.innerHTML);
 });
 
 test('wraps content in a div with "navbar" class', () => {
   expect(container.querySelector(".navbar")).toBeInTheDocument();
 });
 
-test("renders a Home <NavLink>", async () => {
-  const a = screen.queryByText(/Home/);
+test("renders a Home <NavLink>", () => {
+  const link = screen.getByRole("link", { name: "Home" });
 
-  expect(a).toBeInTheDocument();
-  expect(a.tagName).toBe("A");
-  expect(a.href).toContain("/");
+  expect(link).toBeInTheDocument();
+  expect(link.tagName).toBe("A");
+  expect(link.href).toContain("/");
 
-  fireEvent.click(a, { button: 0 });
+  fireEvent.click(link, { button: 0 });
 
-  expect(a.classList).toContain("active");
+  expect(link.classList).toContain("active");
 });
 
-test("renders a Actors <NavLink>", async () => {
-  const a = screen.queryByText(/Actors/);
+test("renders an Actors <NavLink>", () => {
+  const link = screen.getByRole("link", { name: "Actors" });
 
-  expect(a).toBeInTheDocument();
-  expect(a.tagName).toBe("A");
-  expect(a.href).toContain("/");
+  expect(link).toBeInTheDocument();
+  expect(link.tagName).toBe("A");
+  expect(link.href).toContain("/actors");
 
-  fireEvent.click(a, { button: 0 });
+  fireEvent.click(link, { button: 0 });
 
-  expect(a.classList).toContain("active");
+  expect(link.classList).toContain("active");
 });
 
-test("renders a Directors <NavLink>", async () => {
-  const a = screen.queryByText(/Directors/);
+test("renders a Directors <NavLink>", () => {
+  const link = screen.getByRole("link", { name: "Directors" });
 
-  expect(a).toBeInTheDocument();
-  expect(a.tagName).toBe("A");
-  expect(a.href).toContain("/");
+  expect(link).toBeInTheDocument();
+  expect(link.tagName).toBe("A");
+  expect(link.href).toContain("/directors");
 
-  fireEvent.click(a, { button: 0 });
+  fireEvent.click(link, { button: 0 });
 
-  expect(a.classList).toContain("active");
+  expect(link.classList).toContain("active");
 });
